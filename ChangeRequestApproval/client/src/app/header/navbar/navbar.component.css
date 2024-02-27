@@ -1,0 +1,29 @@
+
+
+.mat-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: black; /* Gray background color */
+  color: white; /* Text color */
+}
+
+.toolbar-title {
+  margin-left: 10px;
+}
+
+.toolbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.toolbar-center {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.example-icon img {
+  width: 80px;
+  height: auto;
+  margin-right: 10px;
+}

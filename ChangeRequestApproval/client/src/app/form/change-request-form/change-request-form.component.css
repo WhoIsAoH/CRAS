@@ -1,0 +1,47 @@
+.field{
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.card {
+  max-width: 40%;
+  margin: 0 auto;
+  padding: 5px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: white;
+}
+
+.card h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-label {
+  font-weight: bold;
+}
+
+.form-control {
+  margin-bottom: 15px;
+}
+
+.invalid-feedback {
+  color: #dc3545;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.submission-message {
+  margin-top: 10px;
+  text-align: center;
+  color: #757575;
+  font-size: 14px;
+}
