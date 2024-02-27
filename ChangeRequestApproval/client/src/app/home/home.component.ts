@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
       if (this.successMessage) {
         setTimeout(() => {
           this.successMessage = '';
-        }, 2000);
+        }, 1000);
       }
     });
   }

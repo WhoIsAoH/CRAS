@@ -11,18 +11,12 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatButtonModule} from '@angular/material/button';
 import {FormsModule} from "@angular/forms";
-import { AddDepartmentComponent } from './department/add-department/add-department.component';
-import { UpdateDepartmentComponent } from './department/update-department/update-department.component';
-import { DepartmentComponent } from './department/department/department.component';
-
+import { AdminLoginComponent } from './auth/admin-login/admin-login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RoutingComponent,
-    AddDepartmentComponent,
-    UpdateDepartmentComponent,
-    DepartmentComponent,
 
   ],
   imports: [

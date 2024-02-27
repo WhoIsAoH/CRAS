@@ -4,8 +4,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: black; /* Gray background color */
-  color: white; /* Text color */
+  background-color: skyblue;
+  color: white;
 }
 
 .toolbar-title {

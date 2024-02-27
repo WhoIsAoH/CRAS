@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {LoginComponent} from "./auth/login/login.component";
+import {LoginComponent} from "./auth/user-login/login.component";
 import {HomeComponent} from "./home/home.component";
 import {ChangeRequestFormComponent} from "./form/change-request-form/change-request-form.component";
 import {AddUserFormComponent} from "./admin/add-user-form/add-user-form.component";
@@ -9,9 +9,11 @@ import {FormServiceComponent} from "./services/form-service/form-service.compone
 import {AdminServiceComponent} from "./services/admin-service/admin-service.component";
 import {RequestedFormComponent} from "./user/requested-form/requested-form.component";
 import {NavbarComponent} from "./header/navbar/navbar.component";
+import {AdminLoginComponent} from "./auth/admin-login/admin-login.component";
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'admin/login', component: AdminLoginComponent },
   { path: 'form', component: ChangeRequestFormComponent },
   { path:'', component:LoginComponent},
   { path:'home', component:HomeComponent}
@@ -33,5 +35,6 @@ export const RoutingComponent=[
   FormServiceComponent,
   AdminServiceComponent,
   RequestedFormComponent,
-  NavbarComponent
+  NavbarComponent,
+  AdminLoginComponent
 ]
