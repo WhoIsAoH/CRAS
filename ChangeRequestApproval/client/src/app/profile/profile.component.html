@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <mat-card>
+          <mat-card-header>
+            <mat-card-title>Your Profile</mat-card-title>
+          </mat-card-header>
+        <mat-card-content>
+          <div class="row">
+            <div class="col-md-10 text-center">
+              <img src="assets/default-profile.png" alt="" class="profile-image">
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-10">
+              <form>
+                <div class="form-group">
+                  <label for="username">Username:</label>
+                  <input type="text" class="form-control" id="username" name="username" [ngModel]="user.username" [disabled]="true">
+                </div>
+                <div class="form-group">
+                  <label for="email">Email:</label>
+                  <input type="email" class="form-control" id="email" name="email" [ngModel]="user.email" [disabled]="true">
+                </div>
+                <div class="form-group">
+                  <label for="password">Password:</label>
+                  <input type="password" class="form-control" id="password" name="password" [ngModel]="user.password" [disabled]="true">
+                </div>
+                <div class="form-group">
+                  <label for="role">Role:</label>
+                  <input type="text" class="form-control" id="role" name="role" [ngModel]="user.role" [disabled]="true">
+                </div>
+                <div class="form-group">
+                  <label for="department">Department:</label>
+                  <input type="text" class="form-control" id="department" name="department" [ngModel]="user.department" [disabled]="true">
+                </div>
+                <div class="form-group">
+                  <label for="status">Status:</label>
+                  <input type="text" class="form-control" id="status" name="status" [ngModel]="user.status" [disabled]="true">
+                </div>
+              </form>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

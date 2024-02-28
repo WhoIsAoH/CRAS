@@ -4,19 +4,36 @@ import {LoginComponent} from "./auth/user-login/login.component";
 import {HomeComponent} from "./home/home.component";
 import {ChangeRequestFormComponent} from "./form/change-request-form/change-request-form.component";
 import {AddUserFormComponent} from "./admin/add-user-form/add-user-form.component";
-import {UserServiceComponent} from "./services/user-service/user-service.component";
-import {FormServiceComponent} from "./services/form-service/form-service.component";
-import {AdminServiceComponent} from "./services/admin-service/admin-service.component";
 import {RequestedFormComponent} from "./user/requested-form/requested-form.component";
 import {NavbarComponent} from "./header/navbar/navbar.component";
 import {AdminLoginComponent} from "./auth/admin-login/admin-login.component";
+import {AdminDashboardComponent} from "./admin/admin-dashboard/admin-dashboard.component";
+import {ProfileComponent} from "./profile/profile.component";
+import {SidebarComponent} from "./admin/sidebar/sidebar.component";
+import {ViewRequestListComponent} from "./admin/view-request-list/view-request-list.component";
+
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'admin/login', component: AdminLoginComponent },
   { path: 'form', component: ChangeRequestFormComponent },
   { path:'', component:LoginComponent},
-  { path:'home', component:HomeComponent}
+  { path:'home', component:HomeComponent},
+  { path:'admin-dashboard', component:AdminDashboardComponent,
+    children:[
+      {
+      path:'profile', component:ProfileComponent
+      },
+      {
+        path:'add-user', component:AddUserFormComponent
+      },
+      {
+        path:'view-request-list', component:ViewRequestListComponent
+      },
+    ],
+
+  },
+
 
 ];
 
@@ -31,10 +48,11 @@ export const RoutingComponent=[
   HomeComponent,
   ChangeRequestFormComponent,
   AddUserFormComponent,
-  UserServiceComponent,
-  FormServiceComponent,
-  AdminServiceComponent,
   RequestedFormComponent,
   NavbarComponent,
-  AdminLoginComponent
+  AdminLoginComponent,
+  AdminDashboardComponent,
+  ProfileComponent,
+  SidebarComponent,
+  ViewRequestListComponent,
 ]

@@ -11,12 +11,15 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatButtonModule} from '@angular/material/button';
 import {FormsModule} from "@angular/forms";
-import { AdminLoginComponent } from './auth/admin-login/admin-login.component';
+import {MatListModule} from '@angular/material/list';
+import {MatCardModule} from "@angular/material/card";
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
     AppComponent,
     RoutingComponent,
+
 
   ],
   imports: [
@@ -31,6 +34,9 @@ import { AdminLoginComponent } from './auth/admin-login/admin-login.component';
     MatInputModule,
     FormsModule,
     MatSelectModule,
+    MatListModule,
+    MatCardModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
