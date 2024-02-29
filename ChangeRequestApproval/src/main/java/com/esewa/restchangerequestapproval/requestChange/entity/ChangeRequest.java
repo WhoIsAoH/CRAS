@@ -1,48 +1,51 @@
 package com.esewa.restchangerequestapproval.requestChange.entity;
 
+import com.esewa.restchangerequestapproval.security.user.User;
 import com.esewa.restchangerequestapproval.shared.Severity;
 import com.esewa.restchangerequestapproval.shared.ProgressStatus;
+import com.esewa.restchangerequestapproval.shared.Timestampt;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.auditing.CurrentDateTimeProvider;
 
+import java.util.Calendar;
 import java.util.Date;
 
 @Getter
 @Setter
 @Entity
-public class ChangeRequest {
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class ChangeRequest extends Timestampt {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    //this need to be mapped after the creation of user-info-DTO
+//    @ManyToOne(targetEntity = User.class, cascade = CascadeType.ALL)
+//    @JoinColumn(name = "teacher_id",referencedColumnName = "teacherId")
+//    private User user;
     private String topic;
     private String department;
-    @JsonProperty("assign_to")
     private String assignTo;
     private String reviewer;
     @Enumerated(EnumType.STRING)
     private Severity severity;
-    @Temporal(TemporalType.TIMESTAMP)
-    @JsonProperty("start_date")
-    private Date startDate;
-    @JsonProperty("end_date")
+    @Column(updatable = false)
+    private Date startDate= Calendar.getInstance().getTime();;
     private Date endDate;
 
     private String description;
     private String impact;
 
-    @JsonProperty("roll_back")
     private String rollBack;
 
     //status
-    @Value( value = "${some.key: PENDING}")
-    private ProgressStatus status;
+    @Enumerated(EnumType.STRING)
+    private ProgressStatus status= ProgressStatus.PENDING;
 
-    @Value(value = "${some.key: false}")
-    @JsonProperty("delete_status")
-    private boolean deleteStatus;
 
 }
 

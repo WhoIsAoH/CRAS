@@ -1,44 +1,36 @@
 package com.esewa.restchangerequestapproval.requestChange.model;
 
-import com.esewa.restchangerequestapproval.shared.ProgressStatus;
 import com.esewa.restchangerequestapproval.shared.Severity;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.esewa.restchangerequestapproval.shared.ProgressStatus;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.util.Date;
 
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class RequestDto {
-    @NotNull(message = "topic is must required ")
-    @Size(min=2, max = 100, message = "Specific topic only")
-    private String topic;
-
+@Getter
+@Setter
+public class ResponseDto {
+     private String topic;
+    @NotNull
     private String department;
     @JsonProperty("assign_to")
     private String assignTo;
     private String reviewer;
+    @NotNull
     private Severity severity;
-
-    @JsonIgnore
+    @JsonProperty("start_date")
     private Date startDate;
-
     @JsonProperty("end_date")
     private Date endDate;
+
     private String description;
     private String impact;
     @JsonProperty("roll_back")
     private String rollBack;
 
-    @JsonIgnore
     private ProgressStatus status;
-
 }
