@@ -1,0 +1,8 @@
+<div class="container">
+  <h1>Welcome to Change Request Approval System...</h1>
+
+  <button routerLink="/form"  mat-raised-button color="accent">Send your request</button>
+</div>
+<div *ngIf="successMessage" >
+  {{ successMessage }}
+</div>

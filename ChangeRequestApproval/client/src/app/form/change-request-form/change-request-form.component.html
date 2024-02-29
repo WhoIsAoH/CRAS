@@ -1,0 +1,78 @@
+<div class="container">
+  <form>
+    <h1 align="center">Please fill in the form.....</h1><br/>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="priority">Priority:</label>
+          <select class="form-control" id="priority" name="priority" required>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="assignToDepartment">Department Name:</label>
+      <select class="form-control" id="assignToDepartment" name="assignToDepartment" required>
+        <option value="Database">Database</option>
+        <option value="Network">Network</option>
+        <option value="Administration">Administration</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="assignToSupervisor">Supervisor Name:</label>
+      <select class="form-control" id="assignToSupervisor" name="assignToSupervisor" required>
+        <option value="Supervisor1">Supervisor1</option>
+        <option value="Supervisor2">Supervisor2</option>
+        <option value="Supervisor3">Supervisor3</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="reviewer">Reviewer Name:</label>
+      <select class="form-control" id="reviewer" name="reviewer" required>
+        <option value="Reviewer1">Reviewer1</option>
+        <option value="Reviewer2">Reviewer2</option>
+        <option value="Reviewer3">Reviewer3</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="assignTo">Request to:</label>
+      <select class="form-control" id="assignTo" name="assignTo" required>
+        <option value="RequestTo1">RequestTo1</option>
+        <option value="RequestTo2">RequestTo2</option>
+        <option value="RequestTo3">RequestTo3</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="requestDescription">Description:</label>
+      <textarea class="form-control" id="requestDescription" name="requestDescription" rows="5" placeholder="Please leave your comment..."></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="dateOfRequest">Date of Request:</label>
+      <input type="date" class="form-control" id="dateOfRequest" name="dateOfRequest" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
