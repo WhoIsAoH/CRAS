@@ -1,20 +1,18 @@
 package com.esewa.restchangerequestapproval.requestChange.model;
 
-import com.esewa.restchangerequestapproval.shared.Severity;
 import com.esewa.restchangerequestapproval.shared.ProgressStatus;
+import com.esewa.restchangerequestapproval.shared.Severity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Value;
 
 import java.util.Date;
 
 @Getter
 @Setter
-public class ResponseDto {
-     private String topic;
+public class CRFResponseDto {
+    private String topic;
     @NotNull
     private String department;
     @JsonProperty("assign_to")
