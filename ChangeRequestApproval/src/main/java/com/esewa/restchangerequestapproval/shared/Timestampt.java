@@ -13,9 +13,6 @@ import javax.print.attribute.standard.DateTimeAtCreation;
 
 public abstract class Timestampt {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     @CreationTimestamp
     private DateTimeAtCreation dateTimeAtCreation;
