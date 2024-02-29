@@ -10,9 +10,9 @@ export class ProfileComponent implements OnInit {
     username: 'john_doe',
     email: 'john@example.com',
     password: '********',
+    department: 'Network',
     role: 'Developer',
-    department: 'IT',
-    status: 'Active'
+    status: 'Accepted'
   };
 
   constructor() { }
