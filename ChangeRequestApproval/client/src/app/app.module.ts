@@ -14,12 +14,12 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatListModule} from '@angular/material/list';
 import {MatCardModule} from "@angular/material/card";
 import {MatTableModule} from '@angular/material/table';
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
     AppComponent,
-    RoutingComponent,
-
+    RoutingComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +37,7 @@ import {MatTableModule} from '@angular/material/table';
     MatTableModule,
     ReactiveFormsModule,
     MatSelectModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

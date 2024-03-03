@@ -19,6 +19,7 @@ const routes: Routes = [
   { path: 'form', component: ChangeRequestFormComponent },
   { path:'', component:LoginComponent},
   { path:'home', component:HomeComponent},
+  { path:'profile', component:ProfileComponent},
   { path:'admin-dashboard', component:AdminDashboardComponent,
     children:[
       {
@@ -31,9 +32,7 @@ const routes: Routes = [
         path:'view-request-list', component:ViewRequestListComponent
       },
     ],
-
   },
-
 
 ];
 
