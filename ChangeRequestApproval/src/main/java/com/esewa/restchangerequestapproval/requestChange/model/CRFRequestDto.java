@@ -18,8 +18,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class CRFRequestDto {
     @NotNull(message = "topic is must required ")
-    @Size(min = 2, max = 100, message = "Specific topic only")
-    @Pattern(regexp = "^[a-zA-Z0-9\\s]+$", message = "Topic must contain only letters, numbers, and spaces")
+    @Pattern(regexp = "^[a-zA-Z0-9\\s]{2,100}$", message = "Topic must contain only letters, numbers, and spaces and be between 2 and 100 characters long")
     private String topic;
 
     private String department;

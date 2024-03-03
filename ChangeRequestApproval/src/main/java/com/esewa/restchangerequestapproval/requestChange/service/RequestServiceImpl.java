@@ -5,7 +5,9 @@ import com.esewa.restchangerequestapproval.requestChange.model.CRFRequestDto;
 import com.esewa.restchangerequestapproval.requestChange.model.CRFResponseDto;
 import com.esewa.restchangerequestapproval.requestChange.repo.RequestRepo;
 import com.esewa.restchangerequestapproval.shared.ModelMapperService;
+import com.esewa.restchangerequestapproval.shared.exception.GlobalExceptionHandler;
 import com.esewa.restchangerequestapproval.shared.exception.ResourceNotFoundException;
+import com.esewa.restchangerequestapproval.shared.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -36,7 +38,12 @@ public class RequestServiceImpl implements RequestService {
     @Override
     public CRFResponseDto getRequestById(Long id) {
         ChangeRequest changeRequest = requestRepo.findById(id)
-                .orElseThrow(() -> new RuntimeException("error finding id with" + id));
+                .orElseThrow(() -> {
+                log.error("got error" );
+                throw new RuntimeException("error finding id with" + id);
+                });
+
+//        log.error("ERROR FINDING ID");
         return modelMapperService.changeFormToCRFRequestDto(changeRequest);
     }
 

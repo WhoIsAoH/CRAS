@@ -4,6 +4,7 @@ import com.esewa.restchangerequestapproval.security.config.JwtService;
 import com.esewa.restchangerequestapproval.security.user.User;
 import com.esewa.restchangerequestapproval.security.user.UserRepository;
 import com.esewa.restchangerequestapproval.shared.MessageConstant;
+import com.esewa.restchangerequestapproval.shared.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.bridge.Message;
@@ -31,7 +32,7 @@ public class AuthenticationService {
             Optional<User> optionalUser = repository.findByEmail(request.getEmail());
             if (optionalUser.isPresent()) {
                 log.info("user registered already");
-                return ResponseEntity.badRequest().body(MessageConstant.alreadyRegisterUser);
+                return ResponseEntity.badRequest().body(MessageConstant.ALREADY_REGISTER_USER);
             }
                 log.info("NoDuplicateEmail");
                 var user = User.builder()
@@ -59,7 +60,11 @@ public class AuthenticationService {
                 )
         );
         var user = repository.findByEmail(request.getEmail())
-                .orElseThrow();
+                .orElseThrow(()->{
+                    log.error("User Not Found");
+                    throw new UserNotFoundException("User Not Found!! Create user first");
+                        }
+                        );
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
