@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {FormService} from "../../services/form.service";
+import {FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-change-request-form',
@@ -6,6 +8,11 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./change-request-form.component.css']
 })
 export class ChangeRequestFormComponent implements OnInit {
-  constructor() {}
+
+  constructor(private formService:FormService,
+  private form:FormGroup
+  ) {
+
+  }
   ngOnInit(): void {}
 }
