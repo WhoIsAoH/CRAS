@@ -1,11 +1,13 @@
 package com.esewa.restchangerequestapproval.requestChange.service;
 
 import com.esewa.restchangerequestapproval.requestChange.entity.ChangeRequest;
-import com.esewa.restchangerequestapproval.requestChange.model.RequestDto;
-import com.esewa.restchangerequestapproval.requestChange.model.ResponseDto;
+import com.esewa.restchangerequestapproval.requestChange.model.CRFRequestDto;
+import com.esewa.restchangerequestapproval.requestChange.model.CRFResponseDto;
 import com.esewa.restchangerequestapproval.requestChange.repo.RequestRepo;
 import com.esewa.restchangerequestapproval.shared.ModelMapperService;
-import com.esewa.restchangerequestapproval.shared.ResourceNotFoundException;
+import com.esewa.restchangerequestapproval.shared.exception.GlobalExceptionHandler;
+import com.esewa.restchangerequestapproval.shared.exception.ResourceNotFoundException;
+import com.esewa.restchangerequestapproval.shared.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,7 +17,7 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class RequestServiceImpl implements RequestService{
+public class RequestServiceImpl implements RequestService {
 
     private final RequestRepo requestRepo;
 
@@ -23,29 +25,33 @@ public class RequestServiceImpl implements RequestService{
 
 
     @Override
-    public List<ResponseDto> getChangeRequest() {
+    public List<CRFResponseDto> getChangeRequest() {
         return modelMapperService.entityToListDto(requestRepo.findAll());
     }
 
     @Override
-    public void createChange(RequestDto requestDto){
+    public void createChange(CRFRequestDto crfRequestDto) {
         log.info("creating change request");
-        requestRepo.save(modelMapperService.requestDtoToChangeForm(requestDto));
-//        requestRepo.save(change);
+        requestRepo.save(modelMapperService.crfRequestDtoToChangeForm(crfRequestDto));
     }
 
     @Override
-    public ResponseDto getRequestById(Long id){
+    public CRFResponseDto getRequestById(Long id) {
         ChangeRequest changeRequest = requestRepo.findById(id)
-                .orElseThrow(() -> new RuntimeException("error finding id with"+id));
-        return modelMapperService.changeFormToRequestDto(changeRequest);
+                .orElseThrow(() -> {
+                log.error("got error" );
+                throw new RuntimeException("error finding id with" + id);
+                });
+
+//        log.error("ERROR FINDING ID");
+        return modelMapperService.changeFormToCRFRequestDto(changeRequest);
     }
 
-    public ResponseDto updateRequestForm(Long id, RequestDto requestDto){
+    public CRFResponseDto updateRequestForm(Long id, CRFRequestDto crfRequestDto) {
         ChangeRequest existingRequest = requestRepo.findById(id)
-        .orElseThrow(() -> new ResourceNotFoundException("","",id));
+                .orElseThrow(() -> new ResourceNotFoundException(crfRequestDto.getTopic(), crfRequestDto.getDepartment(), id));
 
-        ChangeRequest updatedRequest = modelMapperService.requestDtoToChangeForm(requestDto);
+        ChangeRequest updatedRequest = modelMapperService.crfRequestDtoToChangeForm(crfRequestDto);
 
         existingRequest.setTopic(updatedRequest.getTopic());
         existingRequest.setDepartment(updatedRequest.getDepartment());
@@ -57,20 +63,9 @@ public class RequestServiceImpl implements RequestService{
         existingRequest.setImpact(updatedRequest.getImpact());
         existingRequest.setRollBack(updatedRequest.getRollBack());
 
-        return modelMapperService.changeFormToRequestDto(existingRequest);
-//        return modelMapperService.requestDtoToChangeForm(existingRequest);
+        return modelMapperService.changeFormToCRFRequestDto(existingRequest);
 
     }
-
-
-
-
-
-
-
-
-
-
 
 
 }

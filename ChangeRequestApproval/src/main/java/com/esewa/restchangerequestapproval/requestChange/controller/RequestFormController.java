@@ -1,7 +1,7 @@
 package com.esewa.restchangerequestapproval.requestChange.controller;
 
-import com.esewa.restchangerequestapproval.requestChange.model.RequestDto;
-import com.esewa.restchangerequestapproval.requestChange.model.ResponseDto;
+import com.esewa.restchangerequestapproval.requestChange.model.CRFRequestDto;
+import com.esewa.restchangerequestapproval.requestChange.model.CRFResponseDto;
 import com.esewa.restchangerequestapproval.requestChange.service.RequestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,27 +17,26 @@ public class RequestFormController {
     private final RequestService requestService;
 
     @GetMapping("/viewAllRequest")
-    private List<ResponseDto> getAllRequest(){
+    public List<CRFResponseDto> getAllRequest(){
 
         return requestService.getChangeRequest();
     }
 
 
     @PostMapping("/createRequest")
-    private void CreteRequest(@RequestBody RequestDto requestDto){
-        requestService.createChange(requestDto);
+    public void CreateRequest(@RequestBody CRFRequestDto crfRequestDto){
+        requestService.createChange(crfRequestDto);
     }
 
     @GetMapping("/viewRequest/{id}")
-    public ResponseEntity<ResponseDto> viewRequestById(@PathVariable Long id){
-        ResponseDto responseDto = requestService.getRequestById(id);
-        return new ResponseEntity<>(responseDto, HttpStatus.OK);
+    public ResponseEntity<CRFResponseDto> viewRequestById(@PathVariable Long id){
+        CRFResponseDto crfResponseDto = requestService.getRequestById(id);
+        return new ResponseEntity<>(crfResponseDto, HttpStatus.OK);
     }
 
     @PostMapping("/updateRequest/{id}")
-    public void updateRequest(@PathVariable Long id, @RequestBody RequestDto requestDto){
-//        return resp
-        requestService.updateRequestForm(id, requestDto);
+    public void updateRequest(@PathVariable Long id, @RequestBody CRFRequestDto crfRequestDto){
+        requestService.updateRequestForm(id, crfRequestDto);
     }
 
 

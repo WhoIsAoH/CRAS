@@ -11,10 +11,9 @@ import java.util.List;
 
 @Data
 @Builder
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Getter
 public class User implements UserDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,8 +28,6 @@ public class User implements UserDetail {
     private Department department;
 
     private String location;
-//    private String a;
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -38,7 +35,7 @@ public class User implements UserDetail {
     }
 
     @Override
-    public String getPassword(){
+    public String getPassword() {
         return password;
     }
 
@@ -46,7 +43,6 @@ public class User implements UserDetail {
     public String getUsername() {
         return email;
     }
-
 
 
     @Override

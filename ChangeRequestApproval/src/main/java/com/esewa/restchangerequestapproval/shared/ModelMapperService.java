@@ -1,8 +1,8 @@
 package com.esewa.restchangerequestapproval.shared;
 
 import com.esewa.restchangerequestapproval.requestChange.entity.ChangeRequest;
-import com.esewa.restchangerequestapproval.requestChange.model.RequestDto;
-import com.esewa.restchangerequestapproval.requestChange.model.ResponseDto;
+import com.esewa.restchangerequestapproval.requestChange.model.CRFRequestDto;
+import com.esewa.restchangerequestapproval.requestChange.model.CRFResponseDto;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -21,17 +21,17 @@ public class ModelMapperService {
     private final ModelMapper modelMapper;
 
 
-    public ChangeRequest requestDtoToChangeForm(RequestDto requestDto){
-        ChangeRequest changeRequest = this.modelMapper.map(requestDto, ChangeRequest.class);
+    public ChangeRequest crfRequestDtoToChangeForm(CRFRequestDto crfRequestDto){
+        ChangeRequest changeRequest = this.modelMapper.map(crfRequestDto, ChangeRequest.class);
         return changeRequest;
     }
 
-    public ResponseDto changeFormToRequestDto(ChangeRequest changeRequest){
-        ResponseDto responseDto = this.modelMapper.map(changeRequest, ResponseDto.class);
-        return responseDto;
+    public CRFResponseDto changeFormToCRFRequestDto(ChangeRequest changeRequest){
+        CRFResponseDto crfResponseDto = this.modelMapper.map(changeRequest, CRFResponseDto.class);
+        return crfResponseDto;
     }
 
-    public List<ResponseDto> entityToListDto(List<ChangeRequest> changeRequests){
-        return changeRequests.stream().map(this:: changeFormToRequestDto).collect(Collectors.toList());
+    public List<CRFResponseDto> entityToListDto(List<ChangeRequest> changeRequests){
+        return changeRequests.stream().map(this:: changeFormToCRFRequestDto).collect(Collectors.toList());
     }
 }

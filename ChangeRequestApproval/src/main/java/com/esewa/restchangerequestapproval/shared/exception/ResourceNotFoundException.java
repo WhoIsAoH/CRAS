@@ -1,4 +1,4 @@
-package com.esewa.restchangerequestapproval.shared;
+package com.esewa.restchangerequestapproval.shared.exception;
 
 import lombok.Getter;
 import lombok.Setter;
