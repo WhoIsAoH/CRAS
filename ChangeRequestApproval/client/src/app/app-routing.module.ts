@@ -10,6 +10,7 @@ import {AdminDashboardComponent} from "./admin/admin-dashboard/admin-dashboard.c
 import {ProfileComponent} from "./profile/profile.component";
 import {SidebarComponent} from "./admin/sidebar/sidebar.component";
 import {ViewRequestListComponent} from "./admin/view-request-list/view-request-list.component";
+import {AssignRequestListComponent} from "./admin/assign-request-list/assign-request-list.component";
 
 
 const routes: Routes = [
@@ -29,6 +30,9 @@ const routes: Routes = [
       {
         path:'view-request-list', component:ViewRequestListComponent
       },
+      {
+        path:'assign-request-list', component:AssignRequestListComponent
+      }
     ],
   },
 
