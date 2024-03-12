@@ -1,11 +1,10 @@
-package com.esewa.restchangerequestapproval.shared;
+package com.esewa.restchangerequestapproval.requestChange.service;
 
 import com.esewa.restchangerequestapproval.requestChange.entity.ChangeRequest;
-import com.esewa.restchangerequestapproval.requestChange.model.CRFRequestDto;
-import com.esewa.restchangerequestapproval.requestChange.model.CRFResponseDto;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import com.esewa.restchangerequestapproval.requestChange.dto.CRFRequestDto;
+import com.esewa.restchangerequestapproval.requestChange.dto.CRFResponseDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -14,20 +13,23 @@ import java.util.stream.Collectors;
 
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
-public class ModelMapperService {
-
+public class CRFModelMapperService {
 
     private final ModelMapper modelMapper;
 
-
     public ChangeRequest crfRequestDtoToChangeForm(CRFRequestDto crfRequestDto){
-        ChangeRequest changeRequest = this.modelMapper.map(crfRequestDto, ChangeRequest.class);
-        return changeRequest;
+        return modelMapper.map(crfRequestDto,ChangeRequest.class);
     }
 
     public CRFResponseDto changeFormToCRFRequestDto(ChangeRequest changeRequest){
         CRFResponseDto crfResponseDto = this.modelMapper.map(changeRequest, CRFResponseDto.class);
+        crfResponseDto.setAuthorId(changeRequest.getAuthor().getId());
+        crfResponseDto.setAssignTo(changeRequest.getAssignTo().getId());
+        crfResponseDto.setSupervisor(changeRequest.getSupervisor().getId());
+        log.info(String.valueOf(crfResponseDto.getAuthorId()));
+        log.info(String.valueOf(crfResponseDto.getAssignTo()));
         return crfResponseDto;
     }
 

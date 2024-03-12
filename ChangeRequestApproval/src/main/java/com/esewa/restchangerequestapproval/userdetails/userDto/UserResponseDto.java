@@ -1,6 +1,6 @@
 package com.esewa.restchangerequestapproval.userdetails.userDto;
 
-import com.esewa.restchangerequestapproval.security.user.Role;
+import com.esewa.restchangerequestapproval.security.entity.Role;
 import com.esewa.restchangerequestapproval.shared.Department;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserResponseDto {
-    private long id;
+    private Integer id;
     private String firstname;
     private String location;
     private String email;

@@ -1,7 +1,5 @@
 package com.esewa.restchangerequestapproval.userdetails.controller;
 
-import com.esewa.restchangerequestapproval.security.user.User;
-import com.esewa.restchangerequestapproval.security.user.UserRepository;
 import com.esewa.restchangerequestapproval.userdetails.service.UserService;
 import com.esewa.restchangerequestapproval.userdetails.userDto.UserResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -16,8 +14,8 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/user/{id}")
-    public ResponseEntity<UserResponseDto> getUser(@PathVariable("id") @RequestBody long userId) {
-        UserResponseDto userResponseDto=userService.getUserById(userId);
+    public ResponseEntity<UserResponseDto> getUser(@PathVariable Integer id) {
+        UserResponseDto userResponseDto=userService.getUserById(id);
         return new ResponseEntity<UserResponseDto>(userResponseDto,HttpStatus.OK);
     }
 }

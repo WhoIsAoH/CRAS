@@ -10,15 +10,18 @@ import {AdminDashboardComponent} from "./admin/admin-dashboard/admin-dashboard.c
 import {ProfileComponent} from "./profile/profile.component";
 import {SidebarComponent} from "./admin/sidebar/sidebar.component";
 import {ViewRequestListComponent} from "./admin/view-request-list/view-request-list.component";
-import {AssignRequestListComponent} from "./admin/assign-request-list/assign-request-list.component";
+import { AuthFormComponent } from './auth-form/auth-form.component';
+import { RegisterComponent } from './auth/register/register.component';
 
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
   { path: 'form', component: ChangeRequestFormComponent },
   { path:'', component:LoginComponent},
   { path:'home', component:HomeComponent},
   { path:'profile', component:ProfileComponent},
+  { path:'authform', component:AuthFormComponent},
   { path:'admin-dashboard', component:AdminDashboardComponent,
     children:[
       {
@@ -30,9 +33,6 @@ const routes: Routes = [
       {
         path:'view-request-list', component:ViewRequestListComponent
       },
-      {
-        path:'assign-request-list', component:AssignRequestListComponent
-      }
     ],
   },
 

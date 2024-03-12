@@ -1,8 +1,10 @@
-package com.esewa.restchangerequestapproval.requestChange.model;
+package com.esewa.restchangerequestapproval.requestChange.dto;
 
+import com.esewa.restchangerequestapproval.security.entity.User;
 import com.esewa.restchangerequestapproval.shared.ProgressStatus;
 import com.esewa.restchangerequestapproval.shared.Severity;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,24 +13,34 @@ import java.util.Date;
 
 @Getter
 @Setter
+//@JsonIgnoreProperties
 public class CRFResponseDto {
+    private Integer id;
+
+
+    @JsonIgnore
+    private User author;
+    private Integer authorId;
+
+
     private String topic;
     @NotNull
     private String department;
-    @JsonProperty("assign_to")
-    private String assignTo;
-    private String reviewer;
     @NotNull
     private Severity severity;
-    @JsonProperty("start_date")
+    @JsonAlias("start_date")
     private Date startDate;
-    @JsonProperty("end_date")
+    @JsonAlias("end_date")
     private Date endDate;
 
     private String description;
     private String impact;
-    @JsonProperty("roll_back")
+    @JsonAlias("roll_back")
     private String rollBack;
 
     private ProgressStatus status;
+
+    @JsonAlias("assign_to")
+    private Integer assignTo;
+    private Integer supervisor;
 }

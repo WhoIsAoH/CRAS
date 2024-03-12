@@ -1,18 +1,19 @@
-package com.esewa.restchangerequestapproval.security.auth;
+package com.esewa.restchangerequestapproval.security.service;
 
-import com.esewa.restchangerequestapproval.security.config.JwtService;
-import com.esewa.restchangerequestapproval.security.user.User;
-import com.esewa.restchangerequestapproval.security.user.UserRepository;
+import com.esewa.restchangerequestapproval.security.auth.AuthenticationRequest;
+import com.esewa.restchangerequestapproval.security.auth.AuthenticationResponse;
+import com.esewa.restchangerequestapproval.security.auth.RegisterRequest;
+import com.esewa.restchangerequestapproval.security.entity.User;
+import com.esewa.restchangerequestapproval.security.repo.UserRepository;
+import com.esewa.restchangerequestapproval.shared.MailService;
 import com.esewa.restchangerequestapproval.shared.MessageConstant;
+import com.esewa.restchangerequestapproval.shared.UserResponse;
+import com.esewa.restchangerequestapproval.shared.exception.UserAlreadyExistException;
 import com.esewa.restchangerequestapproval.shared.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.bridge.Message;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -26,13 +27,13 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+    private final MailService mailService;
 
-    public ResponseEntity<?> register(RegisterRequest request) {
-
+    public UserResponse register(RegisterRequest request) {
             Optional<User> optionalUser = repository.findByEmail(request.getEmail());
             if (optionalUser.isPresent()) {
                 log.info("user registered already");
-                return ResponseEntity.badRequest().body(MessageConstant.ALREADY_REGISTER_USER);
+                throw new UserAlreadyExistException(MessageConstant.ALREADY_REGISTER_USER);
             }
                 log.info("NoDuplicateEmail");
                 var user = User.builder()
@@ -40,18 +41,17 @@ public class AuthenticationService {
                         .lastname(request.getLastname())
                         .email(request.getEmail())
                         .password(passwordEncoder.encode(request.getPassword()))
-
-//                .role(Role.ADMIN)
+                        .department(request.getDepartment())
+                        .location(request.getLocation())
                         .role(request.getRole())
+//                        .supervisor(repository.findById(request.getSupervisor()))
                         .build();
                 repository.save(user);
                 var jwtToken = jwtService.generateToken(user);
                 AuthenticationResponse jwt = new AuthenticationResponse(jwtToken);
-                return ResponseEntity.ok(jwtToken);
-
-
+                mailService.sendEmail(user.getEmail(), MessageConstant.ACCOUNT_CREATION_SUCCESSFUL, MessageConstant.ACCOUNT_CREATE_BODY);
+                return new UserResponse(MessageConstant.SAVED_SUCCESSFULLY);
     }
-
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         log.info("login or authenticating");
         authenticationManager.authenticate(
@@ -63,7 +63,7 @@ public class AuthenticationService {
                 .orElseThrow(()->{
                     log.error("User Not Found");
                     throw new UserNotFoundException("User Not Found!! Create user first");
-                        }
+                            }
                         );
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()

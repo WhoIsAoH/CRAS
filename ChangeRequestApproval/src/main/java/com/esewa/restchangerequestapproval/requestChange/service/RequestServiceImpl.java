@@ -1,16 +1,16 @@
 package com.esewa.restchangerequestapproval.requestChange.service;
 
 import com.esewa.restchangerequestapproval.requestChange.entity.ChangeRequest;
-import com.esewa.restchangerequestapproval.requestChange.model.CRFRequestDto;
-import com.esewa.restchangerequestapproval.requestChange.model.CRFResponseDto;
+import com.esewa.restchangerequestapproval.requestChange.dto.CRFRequestDto;
+import com.esewa.restchangerequestapproval.requestChange.dto.CRFResponseDto;
 import com.esewa.restchangerequestapproval.requestChange.repo.RequestRepo;
-import com.esewa.restchangerequestapproval.shared.ModelMapperService;
-import com.esewa.restchangerequestapproval.shared.exception.GlobalExceptionHandler;
+import com.esewa.restchangerequestapproval.security.repo.UserRepository;
 import com.esewa.restchangerequestapproval.shared.exception.ResourceNotFoundException;
-import com.esewa.restchangerequestapproval.shared.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -21,51 +21,67 @@ public class RequestServiceImpl implements RequestService {
 
     private final RequestRepo requestRepo;
 
-    private final ModelMapperService modelMapperService;
+    private final CRFModelMapperService CRFModelMapperService;
+
+    private final UserRepository userRepository;
 
 
     @Override
     public List<CRFResponseDto> getChangeRequest() {
-        return modelMapperService.entityToListDto(requestRepo.findAll());
+        List<ChangeRequest> changeRequests=requestRepo.findAll();
+        return CRFModelMapperService.entityToListDto(changeRequests);
     }
+
+    @Override
+    public List<CRFResponseDto> getChangeRequestWithSortSevirity(@PathVariable String field) {
+        List<ChangeRequest> changeRequests=requestRepo.findAll(Sort.by(Sort.Direction.ASC, field));
+        return CRFModelMapperService.entityToListDto(changeRequests);
+    }
+
 
     @Override
     public void createChange(CRFRequestDto crfRequestDto) {
         log.info("creating change request");
-        requestRepo.save(modelMapperService.crfRequestDtoToChangeForm(crfRequestDto));
+        ChangeRequest changeRequest= CRFModelMapperService.crfRequestDtoToChangeForm(crfRequestDto);
+        log.info("author ko kuraa");
+        log.info(String.valueOf(crfRequestDto.getAuthor()));
+        changeRequest.setAuthor(userRepository.findById(crfRequestDto.getAuthor()).get());
+        log.info(String.valueOf(userRepository.findById(crfRequestDto.getSupervisor()).get()));
+        changeRequest.setSupervisor(userRepository.findById(crfRequestDto.getSupervisor()).get());
+        log.info(String.valueOf(userRepository.findById(crfRequestDto.getAssignTo()).get()));
+        changeRequest.setAssignTo(userRepository.findById(crfRequestDto.getAssignTo()).get());
+        log.info("testing ");
+        requestRepo.save(changeRequest);
+
     }
 
     @Override
-    public CRFResponseDto getRequestById(Long id) {
+    public CRFResponseDto getRequestById(Integer id) {
         ChangeRequest changeRequest = requestRepo.findById(id)
                 .orElseThrow(() -> {
                 log.error("got error" );
                 throw new RuntimeException("error finding id with" + id);
                 });
-
-//        log.error("ERROR FINDING ID");
-        return modelMapperService.changeFormToCRFRequestDto(changeRequest);
+        //user object
+        //user id
+        log.info("printing dto by id");
+        log.info(String.valueOf(changeRequest.getAuthor().getId()));
+        return CRFModelMapperService.changeFormToCRFRequestDto(changeRequest);
     }
 
-    public CRFResponseDto updateRequestForm(Long id, CRFRequestDto crfRequestDto) {
+    public void updateRequestForm(Integer id, CRFRequestDto crfRequestDto) {
         ChangeRequest existingRequest = requestRepo.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(crfRequestDto.getTopic(), crfRequestDto.getDepartment(), id));
-
-        ChangeRequest updatedRequest = modelMapperService.crfRequestDtoToChangeForm(crfRequestDto);
-
+                .orElseThrow(() -> new ResourceNotFoundException(crfRequestDto.getTopic()));
+        ChangeRequest updatedRequest = CRFModelMapperService.crfRequestDtoToChangeForm(crfRequestDto);
         existingRequest.setTopic(updatedRequest.getTopic());
         existingRequest.setDepartment(updatedRequest.getDepartment());
         existingRequest.setAssignTo(updatedRequest.getAssignTo());
-        existingRequest.setReviewer(updatedRequest.getReviewer());
+        existingRequest.setSupervisor(updatedRequest.getSupervisor());
         existingRequest.setSeverity(updatedRequest.getSeverity());
         existingRequest.setEndDate(updatedRequest.getEndDate());
         existingRequest.setDescription(updatedRequest.getDescription());
         existingRequest.setImpact(updatedRequest.getImpact());
         existingRequest.setRollBack(updatedRequest.getRollBack());
-
-        return modelMapperService.changeFormToCRFRequestDto(existingRequest);
-
+        requestRepo.save(existingRequest);
     }
-
-
 }

@@ -15,13 +15,15 @@ import {MatListModule} from '@angular/material/list';
 import {MatCardModule} from "@angular/material/card";
 import {MatTableModule} from '@angular/material/table';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
-import { AssignRequestListComponent } from './admin/assign-request-list/assign-request-list.component';
+import { AuthFormComponent } from './auth-form/auth-form.component';
+import { RegisterComponent } from './auth/register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RoutingComponent,
-    AssignRequestListComponent
+    AuthFormComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

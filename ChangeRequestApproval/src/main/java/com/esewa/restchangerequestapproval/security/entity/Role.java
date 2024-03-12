@@ -1,4 +1,4 @@
-package com.esewa.restchangerequestapproval.security.user;
+package com.esewa.restchangerequestapproval.security.entity;
 
 public enum Role {
 
