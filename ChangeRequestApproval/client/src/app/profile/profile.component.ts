@@ -7,14 +7,27 @@ import {UserService} from "../services/user.service";
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  user: any;
-  id: number=9;
+  userId!:number;
+  user:any;
+
   constructor(private userService:UserService)
-    {}
+    {
+
+    }
+
 ngOnInit() {
-    this.userService.getEmail()
-    this.userService.getUserById(this.id).subscribe(
-      (data: any |undefined)=>this.user=data
-    )
+this.getUserEmail();
+}
+getUserEmail(){
+  const email=this.userService.getEmail().email
+  this.userService.getUserIdByEmail(email).subscribe((userId:any)=>
+    {
+      this.userId=userId;
+      console.log("User",userId)
+      this.userService.getUserById(this.userId).subscribe(
+        (data)=>this.user=data
+      );
+    }
+  );
 }
 }

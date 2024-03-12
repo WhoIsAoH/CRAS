@@ -1,5 +1,5 @@
 import {Injectable, OnInit} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Constraints} from "../endpoints/constraints";
 import {JwtHelperService} from "@auth0/angular-jwt";
@@ -9,13 +9,17 @@ import {ToastrService} from "ngx-toastr";
 @Injectable({
   providedIn: 'root'
 })
-export class UserService implements OnInit {
+export class UserService  {
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService, private router: Router) {
     const token = localStorage.getItem('token')
   }
 
-  ngOnInit() {
-    this.getEmail()
+
+  getUserIdByEmail(email: string ) {
+    const headers=new HttpHeaders({
+      'Authorization':'Bearer'+localStorage.getItem('token'),
+    });
+    return this.http.get(Constraints.getUserByEmail,{headers,params:{email}})
   }
 
   getEmail(): { email: string } {
@@ -37,5 +41,7 @@ export class UserService implements OnInit {
   saveUser(formData: FormData): Observable<any> {
     return this.http.post(Constraints.saveUserUrl, formData);
   }
+
+
 }
 

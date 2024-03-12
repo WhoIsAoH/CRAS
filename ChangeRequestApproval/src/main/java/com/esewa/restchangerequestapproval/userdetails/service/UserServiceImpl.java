@@ -2,6 +2,7 @@ package com.esewa.restchangerequestapproval.userdetails.service;
 
 import com.esewa.restchangerequestapproval.security.entity.User;
 import com.esewa.restchangerequestapproval.security.repo.UserRepository;
+import com.esewa.restchangerequestapproval.shared.exception.UserNotFoundException;
 import com.esewa.restchangerequestapproval.userdetails.userDto.UserResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -18,5 +19,12 @@ public class UserServiceImpl implements UserService {
         User user=userRepository.findById(userId).get();
         UserResponseDto userResponseDtoFromUser=modelMapper.map(user,UserResponseDto.class);
         return userResponseDtoFromUser;
+    }
+
+    @Override
+    public int getUserIdByEmail(String email) {
+        User user=userRepository.findByEmail(email).orElseThrow(()
+                ->new UserNotFoundException("User not found"));
+        return user.getId();
     }
 }
