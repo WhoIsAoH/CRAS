@@ -1,4 +1,4 @@
-package com.esewa.restchangerequestapproval.formVerification.entity;
+package com.esewa.restchangerequestapproval.formverification.entity;
 
 import com.esewa.restchangerequestapproval.requestChange.entity.ChangeRequest;
 import com.esewa.restchangerequestapproval.security.entity.User;

@@ -14,8 +14,8 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/user/{id}")
-    public ResponseEntity<UserResponseDto> getUser(@PathVariable("id") @RequestBody Integer userId) {
-        UserResponseDto userResponseDto=userService.getUserById(userId);
+    public ResponseEntity<UserResponseDto> getUser(@PathVariable Integer id) {
+        UserResponseDto userResponseDto=userService.getUserById(id);
         return new ResponseEntity<UserResponseDto>(userResponseDto,HttpStatus.OK);
     }
 }

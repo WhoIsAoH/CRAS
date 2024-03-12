@@ -1,6 +1,6 @@
-package com.esewa.restchangerequestapproval.formVerification.repo;
+package com.esewa.restchangerequestapproval.formverification.repo;
 
-import com.esewa.restchangerequestapproval.formVerification.entity.VerifyForm;
+import com.esewa.restchangerequestapproval.formverification.entity.VerifyForm;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

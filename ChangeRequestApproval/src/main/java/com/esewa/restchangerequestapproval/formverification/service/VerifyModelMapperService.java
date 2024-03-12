@@ -1,8 +1,8 @@
-package com.esewa.restchangerequestapproval.formVerification.service;
+package com.esewa.restchangerequestapproval.formverification.service;
 
-import com.esewa.restchangerequestapproval.formVerification.dto.VerifyRequestDto;
-import com.esewa.restchangerequestapproval.formVerification.dto.VerifyResponseDto;
-import com.esewa.restchangerequestapproval.formVerification.entity.VerifyForm;
+import com.esewa.restchangerequestapproval.formverification.dto.VerifyRequestDto;
+import com.esewa.restchangerequestapproval.formverification.dto.VerifyResponseDto;
+import com.esewa.restchangerequestapproval.formverification.entity.VerifyForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;

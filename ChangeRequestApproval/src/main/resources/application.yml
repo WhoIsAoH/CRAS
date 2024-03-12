@@ -30,3 +30,7 @@ spring:
       database: mysql
       database-platform: org.hibernate.dialect.MySQLDialect
 
+
+SECRET_KEY: xxC6yc0IJIujgqxvOFT+bQaTDQ5OxgvwZuDdZdwjCHpDKXLby4ubwIdk7NfCMGis
+
+

@@ -13,15 +13,5 @@ public class RestChangeRequestApprovalApplication {
     public static void main(String[] args) {
         SpringApplication.run(RestChangeRequestApprovalApplication.class, args);
     }
-
-    @Bean
-    public ModelMapper modelMapper(){
-        return new ModelMapper();
-    }
-
-    @Bean
-    public JavaMailSender mailSender(){
-        return new JavaMailSenderImpl();
-    }
 }
 

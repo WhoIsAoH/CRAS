@@ -1,8 +1,8 @@
-package com.esewa.restchangerequestapproval.formVerification.controller;
+package com.esewa.restchangerequestapproval.formverification.controller;
 
-import com.esewa.restchangerequestapproval.formVerification.dto.VerifyRequestDto;
-import com.esewa.restchangerequestapproval.formVerification.dto.VerifyResponseDto;
-import com.esewa.restchangerequestapproval.formVerification.service.FormVerifyService;
+import com.esewa.restchangerequestapproval.formverification.dto.VerifyRequestDto;
+import com.esewa.restchangerequestapproval.formverification.dto.VerifyResponseDto;
+import com.esewa.restchangerequestapproval.formverification.service.FormVerifyService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -22,7 +22,6 @@ public class ChangeRequest {
 
     //many to one mapping
     @ManyToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name="author_id")
     private User author;
 
     private String topic;
