@@ -1,8 +1,14 @@
-package com.esewa.restchangerequestapproval.security.auth;
+package com.esewa.restchangerequestapproval.security.controller;
 
 
+import com.esewa.restchangerequestapproval.security.auth.AuthenticationRequest;
+import com.esewa.restchangerequestapproval.security.auth.AuthenticationResponse;
+import com.esewa.restchangerequestapproval.security.auth.RegisterRequest;
+import com.esewa.restchangerequestapproval.security.service.AuthenticationService;
+import com.esewa.restchangerequestapproval.shared.UserResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,17 +21,15 @@ public class AuthenticationController {
 
     private final AuthenticationService service;
     @PostMapping("/register")
-    public ResponseEntity<?> register(
-            @RequestBody RegisterRequest request
-    ){
+    public UserResponse register(@RequestBody @Validated RegisterRequest request){
         return service.register(request);
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponse> authenticate(
+    public AuthenticationResponse authenticate(
             @RequestBody AuthenticationRequest request
     ){
-        return ResponseEntity.ok(service.authenticate(request));
+        return service.authenticate(request);
 
     }
 

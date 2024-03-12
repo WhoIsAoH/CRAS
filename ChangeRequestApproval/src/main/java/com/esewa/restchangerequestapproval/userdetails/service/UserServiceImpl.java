@@ -1,7 +1,7 @@
 package com.esewa.restchangerequestapproval.userdetails.service;
 
-import com.esewa.restchangerequestapproval.security.user.User;
-import com.esewa.restchangerequestapproval.security.user.UserRepository;
+import com.esewa.restchangerequestapproval.security.entity.User;
+import com.esewa.restchangerequestapproval.security.repo.UserRepository;
 import com.esewa.restchangerequestapproval.userdetails.userDto.UserResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -14,7 +14,7 @@ public class UserServiceImpl implements UserService {
     private final ModelMapper modelMapper;
 
     @Override
-    public UserResponseDto getUserById(long userId) {
+    public UserResponseDto getUserById(Integer userId) {
         User user=userRepository.findById(userId).get();
         UserResponseDto userResponseDtoFromUser=modelMapper.map(user,UserResponseDto.class);
         return userResponseDtoFromUser;

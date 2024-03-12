@@ -1,4 +1,4 @@
-package com.esewa.restchangerequestapproval.security.user;
+package com.esewa.restchangerequestapproval.security.entity;
 
 import com.esewa.restchangerequestapproval.shared.Department;
 import jakarta.persistence.*;
@@ -14,10 +14,11 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class User implements UserDetail {
+public class User implements UserDetail{
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     private String firstname;
     private String lastname;
     private String email;
@@ -28,6 +29,9 @@ public class User implements UserDetail {
     private Department department;
 
     private String location;
+
+    @ManyToOne
+    private User supervisor;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -66,7 +70,7 @@ public class User implements UserDetail {
     }
 
     @Override
-    public String getFirstName() {
-        return firstname;
+    public String getRole() {
+        return role.name();
     }
 }

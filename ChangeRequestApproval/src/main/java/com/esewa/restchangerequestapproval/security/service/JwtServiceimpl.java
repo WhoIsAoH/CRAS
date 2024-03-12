@@ -1,10 +1,13 @@
-package com.esewa.restchangerequestapproval.security.config;
+package com.esewa.restchangerequestapproval.security.service;
 
+import com.esewa.restchangerequestapproval.security.entity.UserDetail;
+import com.esewa.restchangerequestapproval.security.service.JwtService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +18,8 @@ import java.util.Map;
 import java.util.function.Function;
 
 @Service
-public class JwtService {
+@RequiredArgsConstructor
+public class JwtServiceimpl implements JwtService {
 
     private static final String SECRET_KEY = "xxC6yc0IJIujgqxvOFT+bQaTDQ5OxgvwZuDdZdwjCHpDKXLby4ubwIdk7NfCMGis\n";
 
@@ -29,18 +33,20 @@ public class JwtService {
         return claimsResolver.apply(claims);
     }
 
-    public String generateToken(UserDetails userDetails) {
-        return generateToken(new HashMap<>(), userDetails);
+    public String generateToken(UserDetail userDetail) {
+        return generateToken(new HashMap<>(), userDetail);
     }
 
 
-    public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
+    public String generateToken(Map<String, Object> extraClaims, UserDetail userDetail) {
+//        UserDetail userDetail;
         return Jwts
                 .builder()
                 .setClaims(extraClaims)
-                .setSubject(userDetails.getUsername())
+                .setSubject(userDetail.getUsername())
+                .claim("Role",userDetail.getRole())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 1))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 50))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
     }

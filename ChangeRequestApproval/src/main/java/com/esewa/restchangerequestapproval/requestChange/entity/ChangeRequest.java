@@ -1,16 +1,11 @@
 package com.esewa.restchangerequestapproval.requestChange.entity;
 
-import com.esewa.restchangerequestapproval.security.user.User;
-import com.esewa.restchangerequestapproval.shared.Severity;
+import com.esewa.restchangerequestapproval.security.entity.User;
 import com.esewa.restchangerequestapproval.shared.ProgressStatus;
-import com.esewa.restchangerequestapproval.shared.Timestampt;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.esewa.restchangerequestapproval.shared.Severity;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.auditing.CurrentDateTimeProvider;
 
-import java.util.Calendar;
 import java.util.Date;
 
 @Getter
@@ -19,19 +14,23 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ChangeRequest extends Timestampt {
+public class ChangeRequest {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
+
+    //many to one mapping
+    @ManyToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name="author_id")
+    private User author;
 
     private String topic;
     private String department;
-    private String assignTo;
-    private String reviewer;
     @Enumerated(EnumType.STRING)
     private Severity severity;
     @Column(updatable = false)
-    private Date startDate;;
+    private Date startDate;
     private Date endDate;
 
     private String description;
@@ -43,5 +42,8 @@ public class ChangeRequest extends Timestampt {
     @Enumerated(EnumType.STRING)
     private ProgressStatus status= ProgressStatus.PENDING;
 
-
+    @ManyToOne
+    private User assignTo;
+    @ManyToOne
+    private User supervisor;
 }

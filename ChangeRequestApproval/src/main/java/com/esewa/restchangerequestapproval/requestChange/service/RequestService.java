@@ -1,7 +1,8 @@
 package com.esewa.restchangerequestapproval.requestChange.service;
 
-import com.esewa.restchangerequestapproval.requestChange.model.CRFRequestDto;
-import com.esewa.restchangerequestapproval.requestChange.model.CRFResponseDto;
+import com.esewa.restchangerequestapproval.requestChange.dto.CRFRequestDto;
+import com.esewa.restchangerequestapproval.requestChange.dto.CRFResponseDto;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -10,9 +11,10 @@ public interface RequestService {
 
     List<CRFResponseDto> getChangeRequest();
 
-    CRFResponseDto getRequestById(Long id);
+    CRFResponseDto getRequestById(Integer id);
 
-    CRFResponseDto updateRequestForm(Long id, CRFRequestDto crfRequestDto);
+    void updateRequestForm(Integer id, CRFRequestDto crfRequestDto);
+    List<CRFResponseDto> getChangeRequestWithSortSevirity(@PathVariable String field);
 
 
 }

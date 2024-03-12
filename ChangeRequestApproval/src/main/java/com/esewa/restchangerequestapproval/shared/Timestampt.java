@@ -3,20 +3,24 @@ package com.esewa.restchangerequestapproval.shared;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.print.attribute.standard.DateTimeAtCreation;
+import java.time.LocalDateTime;
 
 @Data
-
+//@MappedSuperclass
 public abstract class Timestampt {
 
 
+
     @CreationTimestamp
-    private DateTimeAtCreation dateTimeAtCreation;
+    private LocalDateTime dateTimeAtCreation;
 
     @UpdateTimestamp
-    private UpdateTimestamp updateTimestamp;
+    private LocalDateTime updateTimestamp;
+
+
 }
