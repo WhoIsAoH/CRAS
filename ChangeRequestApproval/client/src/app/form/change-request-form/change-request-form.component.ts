@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-change-request-form',
@@ -6,7 +7,10 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./change-request-form.component.css']
 })
 export class ChangeRequestFormComponent implements OnInit {
-  constructor() {}
-  ngOnInit(): void {}
+  constructor(private route:Router) {}
+  ngOnInit(): void {
+  }
+  submit(){
+    this.route.navigate(['/user'])
+  }
 }
-  

@@ -1,15 +1,15 @@
 <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="m-4">
-  <div class="form-group justify-content-center row  ">
-    <mat-form-field class="col-md-8">
-      <mat-label>User Id</mat-label>
-      <input matInput type="number" formControlName="userId">
-    </mat-form-field>
-  </div>
+  <div class="form-group justify-content-center row ">
+      <mat-form-field class="col-md-8">
+        <mat-label>First Name</mat-label>
+        <input matInput type="text" formControlName="firstname">
+      </mat-form-field>
+    </div>
 
   <div class="form-group justify-content-center row ">
       <mat-form-field class="col-md-8">
-        <mat-label>Name</mat-label>
-        <input matInput type="text" formControlName="name">
+        <mat-label>Last Name</mat-label>
+        <input matInput type="text" formControlName="lastname">
       </mat-form-field>
     </div>
 
@@ -19,25 +19,17 @@
       <input matInput type="email" formControlName="email">
     </mat-form-field>
   </div>
-
-    <div class="form-group justify-content-center row  ">
-      <mat-form-field class="col-md-8">
-        <mat-label>Username</mat-label>
-        <input matInput type="text" formControlName="username">
-      </mat-form-field>
-    </div>
-
-    <div class="form-group justify-content-center row">
-      <mat-form-field class="col-md-8">
-        <mat-label>Password</mat-label>
-        <input matInput type="password" formControlName="password">
-      </mat-form-field>
-    </div>
+  <div class="form-group justify-content-center row  ">
+    <mat-form-field class="col-md-8">
+      <mat-label>Address</mat-label>
+      <input matInput type="textarea" formControlName="location">
+    </mat-form-field>
+  </div>
 
   <div class="form-group justify-content-center row">
     <mat-form-field class="col-md-8">
-      <mat-label>Contact Number</mat-label>
-      <input matInput type="text" formControlName="contactNumber">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" formControlName="password">
     </mat-form-field>
   </div>
 
@@ -45,9 +37,9 @@
     <mat-form-field class="col-md-8">
       <mat-label>Department</mat-label>
       <mat-select formControlName="department">
-        <mat-option value="network">Network</mat-option>
-        <mat-option value="administration">Administration</mat-option>
-        <mat-option value="system">System</mat-option>
+        <mat-option value="NETWORK_ADMINISTRATION">Network</mat-option>
+        <mat-option value="SYSTEMS_ADMINISTRATION">Administration</mat-option>
+        <mat-option value="CYBERSECURITY">System</mat-option>
       </mat-select>
     </mat-form-field>
   </div>
@@ -56,13 +48,11 @@
       <mat-form-field class="col-md-8">
         <mat-label>Role</mat-label>
         <mat-select formControlName="role">
-          <mat-option value="developer">Developer</mat-option>
-          <mat-option value="supervisor">Supervisor</mat-option>
-          <mat-option value="admin">Admin</mat-option>
+          <mat-option value="DEVELOPER">Developer</mat-option>
+          <mat-option value="SUPERVISOR">Supervisor</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
-
 
   <div class="col-md-12 text-center">
       <button mat-raised-button type="submit" class="btn btn-primary">Submit</button>
