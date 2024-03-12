@@ -27,3 +27,6 @@
   height: auto;
   margin-right: 10px;
 }
+.float-end{
+  float: right;
+}

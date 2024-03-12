@@ -40,3 +40,13 @@ label {
 .btn-primary:hover {
   background-color: #0056b3;
 }
+.password-input-group {
+  position: relative;
+}
+
+.password-toggle-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}

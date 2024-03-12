@@ -8,12 +8,13 @@ import {UserService} from "../services/user.service";
 })
 export class ProfileComponent implements OnInit {
   user: any;
-  id: number=1;
+  id: number=9;
   constructor(private userService:UserService)
     {}
 ngOnInit() {
+    this.userService.getEmail()
     this.userService.getUserById(this.id).subscribe(
-      (data:any|undefined)=>this.user=data
+      (data: any |undefined)=>this.user=data
     )
 }
 }
