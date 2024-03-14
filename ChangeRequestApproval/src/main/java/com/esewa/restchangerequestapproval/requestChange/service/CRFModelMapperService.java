@@ -24,10 +24,13 @@ public class CRFModelMapperService {
     }
 
     public CRFResponseDto changeFormToCRFRequestDto(ChangeRequest changeRequest){
+        //error
         CRFResponseDto crfResponseDto = this.modelMapper.map(changeRequest, CRFResponseDto.class);
         crfResponseDto.setAuthorId(changeRequest.getAuthor().getId());
-        crfResponseDto.setAssignTo(changeRequest.getAssignTo().getId());
-        crfResponseDto.setSupervisor(changeRequest.getSupervisor().getId());
+//        crfResponseDto.setAssignTo(changeRequest.getAssignTo().getId());
+//        crfResponseDto.setSupervisor(changeRequest.getSupervisor().getId());
+        crfResponseDto.setSupervisorId(changeRequest.getSupervisor().getId());
+        crfResponseDto.setAssignToId(changeRequest.getAssignTo().getId());
         log.info(String.valueOf(crfResponseDto.getAuthorId()));
         log.info(String.valueOf(crfResponseDto.getAssignTo()));
         return crfResponseDto;

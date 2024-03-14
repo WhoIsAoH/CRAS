@@ -11,4 +11,6 @@ public interface FormVerifyService {
     @Transactional
     void createVerifyForm(VerifyRequestDto verifyRequestDto);
      List<VerifyResponseDto> viewAllVerification();
+    void changeSupervisorVerification(Integer formId);
+    void changeAssigneeVerification(Integer formId);
 }

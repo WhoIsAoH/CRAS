@@ -5,6 +5,7 @@ import com.esewa.restchangerequestapproval.formverification.dto.VerifyResponseDt
 import com.esewa.restchangerequestapproval.formverification.entity.VerifyForm;
 import com.esewa.restchangerequestapproval.formverification.repo.FormVerifyRepo;
 import com.esewa.restchangerequestapproval.formverification.service.VerifyModelMapperService;
+import com.esewa.restchangerequestapproval.requestChange.entity.ChangeRequest;
 import com.esewa.restchangerequestapproval.shared.ChangeFormStatus;
 import com.esewa.restchangerequestapproval.formverification.service.FormVerifyService;
 import com.esewa.restchangerequestapproval.requestChange.repo.RequestRepo;
@@ -41,6 +42,17 @@ public class FormVerifyServiceImpl implements FormVerifyService {
     @Override
     public List<VerifyResponseDto> viewAllVerification(){
         return modelMapper.verifyFormToListDto(formVerifyRepo.findAll());
+    }
+
+    @Override
+    public void changeAssigneeVerification(Integer formId){
+        ChangeRequest changeRequest = formVerifyRepo.getById(formId).getForm();
+        changeRequest.setAssigneeVerification(true);
+    }
+    @Override
+    public void changeSupervisorVerification(Integer formId){
+        ChangeRequest changeRequest = formVerifyRepo.getById(formId).getForm();
+        changeRequest.setSupervisorVerification(true);
     }
 
 

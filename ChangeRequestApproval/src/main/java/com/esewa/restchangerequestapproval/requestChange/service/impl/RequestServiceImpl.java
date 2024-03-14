@@ -1,9 +1,11 @@
-package com.esewa.restchangerequestapproval.requestChange.service;
+package com.esewa.restchangerequestapproval.requestChange.service.impl;
 
 import com.esewa.restchangerequestapproval.requestChange.entity.ChangeRequest;
 import com.esewa.restchangerequestapproval.requestChange.dto.CRFRequestDto;
 import com.esewa.restchangerequestapproval.requestChange.dto.CRFResponseDto;
 import com.esewa.restchangerequestapproval.requestChange.repo.RequestRepo;
+import com.esewa.restchangerequestapproval.requestChange.service.CRFModelMapperService;
+import com.esewa.restchangerequestapproval.requestChange.service.RequestService;
 import com.esewa.restchangerequestapproval.security.repo.UserRepository;
 import com.esewa.restchangerequestapproval.shared.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +23,7 @@ public class RequestServiceImpl implements RequestService {
 
     private final RequestRepo requestRepo;
 
-    private final CRFModelMapperService CRFModelMapperService;
+    private final com.esewa.restchangerequestapproval.requestChange.service.CRFModelMapperService CRFModelMapperService;
 
     private final UserRepository userRepository;
 
@@ -50,6 +52,8 @@ public class RequestServiceImpl implements RequestService {
         changeRequest.setSupervisor(userRepository.findById(crfRequestDto.getSupervisor()).get());
         log.info(String.valueOf(userRepository.findById(crfRequestDto.getAssignTo()).get()));
         changeRequest.setAssignTo(userRepository.findById(crfRequestDto.getAssignTo()).get());
+        changeRequest.setAssigneeVerification(false);
+        changeRequest.setSupervisorVerification(false);
         log.info("testing ");
         requestRepo.save(changeRequest);
 

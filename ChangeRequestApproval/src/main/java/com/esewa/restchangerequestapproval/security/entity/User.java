@@ -1,6 +1,7 @@
 package com.esewa.restchangerequestapproval.security.entity;
 
 import com.esewa.restchangerequestapproval.shared.Department;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -25,13 +26,16 @@ public class User implements UserDetail{
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
+
+//    @JsonIgnore
+//    @ManyToMany
+//    private List<User> supervisor;
+//    private Integer supervisor;
+
     @Enumerated(EnumType.STRING)
     private Department department;
-
     private String location;
 
-    @ManyToOne
-    private User supervisor;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -5,18 +5,19 @@ import com.esewa.restchangerequestapproval.shared.ProgressStatus;
 import com.esewa.restchangerequestapproval.shared.Severity;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Getter
 @Setter
-//@JsonIgnoreProperties
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CRFResponseDto {
     private Integer id;
-
 
     @JsonIgnore
     private User author;
@@ -40,7 +41,12 @@ public class CRFResponseDto {
 
     private ProgressStatus status;
 
+    @JsonIgnore
+    private User assignTo;
     @JsonAlias("assign_to")
-    private Integer assignTo;
-    private Integer supervisor;
+    private Integer assignToId;
+
+    @JsonIgnore
+    private User supervisor;
+    private Integer supervisorId;
 }

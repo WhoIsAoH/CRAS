@@ -23,6 +23,15 @@ public class ChangeRequest {
     //many to one mapping
     @ManyToOne(cascade = CascadeType.ALL)
     private User author;
+    @ManyToOne
+    private User assignTo;
+
+    @Column(columnDefinition = "BOOLEAN")
+    private boolean assigneeVerification;
+    @ManyToOne
+    private User supervisor;
+    @Column(columnDefinition = "BOOLEAN")
+    private boolean supervisorVerification;
 
     private String topic;
     private String department;
@@ -40,9 +49,4 @@ public class ChangeRequest {
     //status
     @Enumerated(EnumType.STRING)
     private ProgressStatus status= ProgressStatus.PENDING;
-
-    @ManyToOne
-    private User assignTo;
-    @ManyToOne
-    private User supervisor;
 }

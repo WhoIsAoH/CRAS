@@ -1,8 +1,8 @@
 package com.esewa.restchangerequestapproval.security.service;
 
-import com.esewa.restchangerequestapproval.security.auth.AuthenticationRequest;
-import com.esewa.restchangerequestapproval.security.auth.AuthenticationResponse;
-import com.esewa.restchangerequestapproval.security.auth.RegisterRequest;
+import com.esewa.restchangerequestapproval.security.auth.AuthenticationRequestDto;
+import com.esewa.restchangerequestapproval.security.auth.AuthenticationResponseDto;
+import com.esewa.restchangerequestapproval.security.auth.RegisterRequestDto;
 import com.esewa.restchangerequestapproval.security.entity.User;
 import com.esewa.restchangerequestapproval.security.repo.UserRepository;
 import com.esewa.restchangerequestapproval.shared.MailService;
@@ -17,6 +17,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -29,7 +32,7 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final MailService mailService;
 
-    public UserResponse register(RegisterRequest request) {
+    public UserResponse register(RegisterRequestDto request) {
             Optional<User> optionalUser = repository.findByEmail(request.getEmail());
             if (optionalUser.isPresent()) {
                 log.info("user registered already");
@@ -44,15 +47,17 @@ public class AuthenticationService {
                         .department(request.getDepartment())
                         .location(request.getLocation())
                         .role(request.getRole())
-//                        .supervisor(repository.findById(request.getSupervisor()))
+//                        .supervisor(request.getSupervisor())
+//                        .supelrvisor(repository.getById(request.getSupervisor()))
+//                        .supervisor(new ArrayList<>(Arrays.asList(User.builder().id(request.getSupervisor()).build())))
                         .build();
                 repository.save(user);
                 var jwtToken = jwtService.generateToken(user);
-                AuthenticationResponse jwt = new AuthenticationResponse(jwtToken);
+                AuthenticationResponseDto jwt = new AuthenticationResponseDto(jwtToken);
                 mailService.sendEmail(user.getEmail(), MessageConstant.ACCOUNT_CREATION_SUCCESSFUL, MessageConstant.ACCOUNT_CREATE_BODY);
                 return new UserResponse(MessageConstant.SAVED_SUCCESSFULLY);
     }
-    public AuthenticationResponse authenticate(AuthenticationRequest request) {
+    public AuthenticationResponseDto authenticate(AuthenticationRequestDto request) {
         log.info("login or authenticating");
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -66,7 +71,7 @@ public class AuthenticationService {
                             }
                         );
         var jwtToken = jwtService.generateToken(user);
-        return AuthenticationResponse.builder()
+        return AuthenticationResponseDto.builder()
                 .token(jwtToken)
                 .build();
     }

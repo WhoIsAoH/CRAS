@@ -1,16 +1,19 @@
 spring:
+  config:
+    import: classpath:credential.yml
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/changeRequest?createDatabaseIfNotExist=true
     username: root
     password: root
 
+
 # email
   mail:
     host: smtp.gmail.com
     port: 587
-    username: ajay.paudel1@gmail.com
-    password: xyur yuoi eaes oohu
+    username: ${email.username}
+    password: ${email.password}
     properties:
       mail:
         smtp:
@@ -22,7 +25,7 @@ spring:
   #JPA
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
     show-sql: true
     properties:
       hibernate:

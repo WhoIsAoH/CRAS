@@ -35,4 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
-client/src/app/auth/admin-login
+
+#custom file
+/src/main/resources/credential.yml
